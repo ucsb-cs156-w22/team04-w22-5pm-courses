@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 
-const SelectLevel = ({levels, _level, setLevel, controlId, label}) => {
+const LevelSelector = ({levels, _level, setLevel, controlId, label}) => {
     const localSearchLevel = localStorage.getItem(controlId);
     const [level, setLevelState] = useState(localSearchLevel || "U");
 
@@ -23,4 +23,4 @@ const SelectLevel = ({levels, _level, setLevel, controlId, label}) => {
     )
 };
 
-export default SelectLevel;
+export default LevelSelector;
