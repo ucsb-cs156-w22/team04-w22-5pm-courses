@@ -10,6 +10,7 @@
     "babel-loader": "8.1.0",
     "bootstrap": "^5.0.0-beta3",
     "history": "^5.2.0",
+    "isomorphic-unfetch": "^3.1.0",
     "react": "^17.0.1",
     "react-bootstrap": "^2.0.0-alpha.0",
     "react-dom": "^17.0.1",
@@ -21,6 +22,7 @@
     "react-scripts": "5.0.0",
     "react-table": "^7.7.0",
     "react-toastify": "^8.1.1",
+    "swr": "^1.2.2",
     "web-vitals": "^1.1.1"
   },
   "devDependencies": {
