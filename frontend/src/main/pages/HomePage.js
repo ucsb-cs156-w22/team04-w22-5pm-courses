@@ -18,19 +18,19 @@ export default function HomePage() {
   const [courseJSON, setCourseJSON] = useState(initialCourseJSON);
 
   //Check for closed, cancelled, full status
-  const [cancelled, setCancelledChecked] = useState(false);
-  const [closed, setClosedChecked] = useState(false);
-  const [full, setFullChecked] = useState(false);
+  // const [cancelled, setCancelledChecked] = useState(false);
+  // const [closed, setClosedChecked] = useState(false);
+  // const [full, setFullChecked] = useState(false);
 
-  const handleCancelledOnChange = () => {
-      setCancelledChecked(!cancelled);
-  };
-  const handleClosedOnChange = () => {
-      setClosedChecked(!closed);
-  };
-  const handleFullOnChange = () => {
-      setFullChecked(!full);
-  };
+  // const handleCancelledOnChange = () => {
+  //     setCancelledChecked(!cancelled);
+  // };
+  // const handleClosedOnChange = () => {
+  //     setClosedChecked(!closed);
+  // };
+  // const handleFullOnChange = () => {
+  //     setFullChecked(!full);
+  // };
 
   return (
     <BasicLayout>

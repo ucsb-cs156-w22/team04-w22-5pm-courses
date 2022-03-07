@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 
-const LevelSelector = ({levels, _level, setLevel, controlId, label}) => {
+const SingleLevelDropdown = ({levels, _level, setLevel, controlId, label="Course Level"}) => {
     const localSearchLevel = localStorage.getItem(controlId);
-    const [level, setLevelState] = useState(localSearchLevel || "U");
+    const [levelState, setLevelState] = useState(localSearchLevel || "U");
 
     const handleLeveltoChange = (event) => {
         localStorage.setItem(controlId, event.target.value);
@@ -14,8 +14,8 @@ const LevelSelector = ({levels, _level, setLevel, controlId, label}) => {
     return(
         <Form.Group controlId={controlId}>
             <Form.Label>{label}</Form.Label>
-            <Form.Control as="select" value={level} onChange={handleLeveltoChange} >
-                {level.map(function (object, i) {
+            <Form.Control as="select" value={levelState} onChange={handleLeveltoChange} >
+                {levels.map(function (object, i) {
                     return <option key={controlId + '-' + i} value={object[0]}>{object[1]}</option>;
                 })}
             </Form.Control>
@@ -23,4 +23,4 @@ const LevelSelector = ({levels, _level, setLevel, controlId, label}) => {
     )
 };
 
-export default LevelSelector;
+export default SingleLevelDropdown;

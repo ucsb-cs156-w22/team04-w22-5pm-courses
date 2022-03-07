@@ -8,6 +8,8 @@ import { fetchSubjectAreas } from "main/services/subjectAreaService";
 import { quarterRange } from "main/utils/quarterUtilities";
 
 import SingleQuarterDropdown from "../Quarters/SingleQuarterDropdown";
+import SingleSubjectDropdown from "../Subjects/SingleSubjectDropdown"
+import SingleLevelDropdown from "../Levels/SingleLevelDropdown"
 
 const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 	const quarters = quarterRange("20084", "20222");
@@ -35,12 +37,12 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 		}
 	);
 
-	useEffect(() => {
-		if (!errorNotified && errorGettingSubjects) {
-			toast(`${errorGettingSubjects}`, { appearance: "error" });
-			setErrorNotified(true);
-		}
-	}, [errorGettingSubjects, errorNotified, toast]);
+	// useEffect(() => {
+	// 	if (!errorNotified && errorGettingSubjects) {
+	// 		toast(`${errorGettingSubjects}`, { appearance: "error" });
+	// 		setErrorNotified(true);
+	// 	}
+	// }, [errorGettingSubjects, errorNotified, toast]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -79,17 +81,16 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 						setQuarter={handleQuarterOnChange}
 						controlId={"BasicSearch.Quarter"}
 					/></Col>
-					<Col md = "auto"><SingleQuarterDropdown
-						quarters={quarters}
-						quarter={quarter}
-						setQuarter={handleQuarterOnChange}
-						controlId={"BasicSearch.Quarter"}
+					<Col md = "auto"><SingleSubjectDropdown
+						subjects={allTheSubjects}
+						subject={subject}
+						setSubject={handleSubjectOnChange}
 					/></Col>
-                    <Col md = "auto"><SingleQuarterDropdown
-                        quarters={quarters}
-                        quarter={quarter}
-                        setQuarter={handleQuarterOnChange}
-                        controlId={"BasicSearch.Quarter"}
+                    <Col md = "auto"><SingleLevelDropdown
+                        levels={levels}
+                        level={level}
+                        setLevel={handleLevelOnChange}
+                        controlId={"BasicSearch.Level"}
                     /></Col>
 				</Row>
 			</Container>
