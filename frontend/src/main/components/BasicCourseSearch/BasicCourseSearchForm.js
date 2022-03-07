@@ -37,13 +37,6 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 		}
 	);
 
-	// useEffect(() => {
-	// 	if (!errorNotified && errorGettingSubjects) {
-	// 		toast(`${errorGettingSubjects}`, { appearance: "error" });
-	// 		setErrorNotified(true);
-	// 	}
-	// }, [errorGettingSubjects, errorNotified, toast]);
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		fetchJSON(event, { quarter, subject, level }).then((courseJSON) => {

@@ -17,21 +17,6 @@ export default function HomePage() {
   // courseId, title, sectionNumber, instructor, enroll code, units, total enrolled students, max enrolled
   const [courseJSON, setCourseJSON] = useState(initialCourseJSON);
 
-  //Check for closed, cancelled, full status
-  // const [cancelled, setCancelledChecked] = useState(false);
-  // const [closed, setClosedChecked] = useState(false);
-  // const [full, setFullChecked] = useState(false);
-
-  // const handleCancelledOnChange = () => {
-  //     setCancelledChecked(!cancelled);
-  // };
-  // const handleClosedOnChange = () => {
-  //     setClosedChecked(!closed);
-  // };
-  // const handleFullOnChange = () => {
-  //     setFullChecked(!full);
-  // };
-
   return (
     <BasicLayout>
       <div className="pt-2">

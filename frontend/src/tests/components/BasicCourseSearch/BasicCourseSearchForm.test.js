@@ -54,12 +54,6 @@ describe("BasicCourseSearchForm tests", () => {
 			sampleKey: "sampleValue",
 		};
 
-		// Create spy functions (aka jest function, magic function)
-		// The function doesn't have any implementation unless
-		// we specify one.  But it does keep track of whether
-		// it was called, how many times it was called,
-		// and what it was passed.
-
 		const setCourseJSONSpy = jest.fn();
 		const fetchJSONSpy = jest.fn();
 
@@ -88,12 +82,9 @@ describe("BasicCourseSearchForm tests", () => {
 		const submitButton = getByText("Submit");
 		userEvent.click(submitButton);
 
-		// we need to be careful not to assert this expectation
-		// until all of the async promises are resolved
 		await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(1));
 		await waitFor(() => expect(fetchJSONSpy).toHaveBeenCalledTimes(1));
 
-		// assert that ourSpy was called with the right value
 		expect(setCourseJSONSpy).toHaveBeenCalledWith(sampleReturnValue);
 		expect(fetchJSONSpy).toHaveBeenCalledWith(
 			expect.any(Object),
@@ -106,12 +97,6 @@ describe("BasicCourseSearchForm tests", () => {
 			sampleKey: "sampleValue",
 			total: 0,
 		};
-
-		// Create spy functions (aka jest function, magic function)
-		// The function doesn't have any implementation unless
-		// we specify one.  But it does keep track of whether
-		// it was called, how many times it was called,
-		// and what it was passed.
 
 		const setCourseJSONSpy = jest.fn();
 		const fetchJSONSpy = jest.fn();
@@ -135,73 +120,7 @@ describe("BasicCourseSearchForm tests", () => {
 		const submitButton = getByText("Submit");
 		userEvent.click(submitButton);
 
-		// we need to be careful not to assert this expectation
-		// until all of the async promises are resolved
 		await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(0));
 	});
 
-	// test("the download csv button seems to work", async () => {
-	// 	const sampleReturnValue = {
-	// 		sampleKey: "sampleValue",
-	// 	};
-
-	// 	// Create spy functions (aka jest function, magic function)
-	// 	// The function doesn't have any implementation unless
-	// 	// we specify one.  But it does keep track of whether
-	// 	// it was called, how many times it was called,
-	// 	// and what it was passed.
-
-	// 	const setCourseJSONSpy = jest.fn();
-	// 	const fetchJSONSpy = jest.fn();
-
-	// 	fetchJSONSpy.mockResolvedValue(sampleReturnValue);
-
-	// 	const { getByText, getByLabelText } = render(
-	// 		<BasicCourseSearchForm
-	// 			setCourseJSON={setCourseJSONSpy}
-	// 			fetchJSON={fetchJSONSpy}
-	// 		/>
-	// 	);
-
-	// 	const expectedFields = {
-	// 		quarter: "20204",
-	// 		subject: "MATH",
-	// 		level: "G",
-	// 	};
-
-	// 	const selectQuarter = getByLabelText("Quarter");
-	// 	userEvent.selectOptions(selectQuarter, "20204");
-	// 	const selectSubject = getByLabelText("Subject Area");
-	// 	userEvent.selectOptions(selectSubject, "MATH");
-	// 	const selectLevel = getByLabelText("Course Level");
-	// 	userEvent.selectOptions(selectLevel, "G");
-
-	// 	const submitButton = getByText("Submit");
-	// 	userEvent.click(submitButton);
-
-	// 	// we need to be careful not to assert this expectation
-	// 	// until all of the async promises are resolved
-	// 	await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(1));
-	// 	await waitFor(() => expect(fetchJSONSpy).toHaveBeenCalledTimes(1));
-
-	// 	// assert that ourSpy was called with the right value
-	// 	expect(setCourseJSONSpy).toHaveBeenCalledWith(sampleReturnValue);
-	// 	expect(fetchJSONSpy).toHaveBeenCalledWith(
-	// 		expect.any(Object),
-	// 		expectedFields
-	// 	);
-
-	// 	// lets try the download csv now
-	// 	// const csvButton = getByText("Download CSV");
-	// 	// userEvent.click(csvButton);
-	// });
-
-	// test("if the backend endpoint for subjects is down, we get a toast", async () => {
-	// 	useSWR.mockReturnValue({
-	// 		data: allTheSubjects,
-	// 		error: new Error("mock Error"),
-	// 	});
-	// 	render(<BasicCourseSearchForm />);
-	// 	expect(addToast).toHaveBeenCalled();
-	// });
 });
