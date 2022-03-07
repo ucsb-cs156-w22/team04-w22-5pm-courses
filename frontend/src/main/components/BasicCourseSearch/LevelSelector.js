@@ -1,0 +1,26 @@
+import React, {useState} from "react";
+import {Form} from "react-bootstrap";
+
+const LevelSelector = ({levels, _level, setLevel, controlId, label}) => {
+    const localSearchLevel = localStorage.getItem(controlId);
+    const [level, setLevelState] = useState(localSearchLevel || "U");
+
+    const handleLeveltoChange = (event) => {
+        localStorage.setItem(controlId, event.target.value);
+        setLevelState(event.target.value);
+        setLevel(event.target.value);
+    }
+
+    return(
+        <Form.Group controlId={controlId}>
+            <Form.Label>{label}</Form.Label>
+            <Form.Control as="select" value={level} onChange={handleLeveltoChange} >
+                {level.map(function (object, i) {
+                    return <option key={controlId + '-' + i} value={object[0]}>{object[1]}</option>;
+                })}
+            </Form.Control>
+        </Form.Group>
+    )
+};
+
+export default LevelSelector;
