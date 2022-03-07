@@ -2,6 +2,7 @@ import React from 'react';
 
 import PersonalSchedulesTable from 'main/components/PersonalSchedules/PersonalSchedulesTable';
 import { personalScheduleFixtures } from 'fixtures/personalScheduleFixtures';
+import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 
 export default {
     title: 'components/PersonalSchedules/PersonalSchedulesTable',
@@ -26,4 +27,10 @@ ThreeSubjects.args = {
     personalSchedules: personalScheduleFixtures.threePersonalSchedules
 };
 
+
+export const ThreeSubjectsUser = Template.bind({});
+ThreeSubjectsUser.args = {
+    personalSchedules: personalScheduleFixtures.threePersonalSchedules,
+    currentUser: currentUserFixtures.userOnly
+};
 
