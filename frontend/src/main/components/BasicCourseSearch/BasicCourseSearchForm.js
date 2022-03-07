@@ -47,6 +47,9 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 			}
 			setCourseJSON(courseJSON);
 		});
+		toast("If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",{
+			appearance: "error",
+		});
 	};
 
 	const handleLevelOnChange = (level) => {
