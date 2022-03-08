@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { toast } from "react-toastify";
 
 import { allTheSubjects } from "fixtures/subjectFixtures";
+import { allTheLevels } from "fixtures/levelsFixtures";
 import { fetchSubjectAreas } from "main/services/subjectAreaService";
 import { quarterRange } from "main/utils/quarterUtilities";
 
@@ -13,10 +14,6 @@ import SingleLevelDropdown from "../Levels/SingleLevelDropdown"
 
 const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 	const quarters = quarterRange("20084", "20222");
-	const levels = [["L","Undergrad-Lower"], 
-					["S","Undergrad-Upper Division"], 
-					["U","Undergrad-All"], 
-					["G","Graduate"]];
 
     const localSubject = localStorage.getItem("BasicSearch.Subject");
     const localQuarter = localStorage.getItem("BasicSearch.Quarter");
@@ -29,7 +26,7 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 	const [errorNotified, setErrorNotified] = useState(false);
 
 	const { data: subjects, error: errorGettingSubjects } = useSWR(
-		"/api/public/subjects",
+		"/api/UCSBSubjects/load",
 		fetchSubjectAreas,
 		{
 			initialData: allTheSubjects,
@@ -81,9 +78,10 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 						subjects={allTheSubjects}
 						subject={subject}
 						setSubject={handleSubjectOnChange}
+						controlId={"BasicSearch.Subject"}
 					/></Col>
                     <Col md = "auto"><SingleLevelDropdown
-                        levels={levels}
+                        levels={allTheLevels}
                         level={level}
                         setLevel={handleLevelOnChange}
                         controlId={"BasicSearch.Level"}
