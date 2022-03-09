@@ -57,7 +57,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
             id: 17,
             name: "SampName",
             description: "desc",
-            quarter: "20083"
+            quarter: "W08"
         };
 
         axiosMock.onPost("/api/personalschedules/post").reply( 202, personalSchedule );
@@ -81,7 +81,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
 
         fireEvent.change(nameField, { target: { value: 'SampName' } });
         fireEvent.change(descriptionField, { target: { value: 'desc' } });
-        fireEvent.change(quarterField, { target: { value: '20083' } });
+        fireEvent.change(quarterField, { target: { value: 'W08' } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -93,7 +93,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
             {
             "name": "SampName",
             "description": "desc",
-            "quarter": "20083"
+            "quarter": "W08"
         });
 
         expect(mockToast).toBeCalledWith("New personalSchedule Created - id: 17 name: SampName");
