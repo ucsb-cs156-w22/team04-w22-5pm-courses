@@ -1,3 +1,4 @@
+import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SingleQuarterDropdown from "main/components/Quarters/SingleQuarterDropdown"
@@ -5,7 +6,7 @@ import { quarterRange } from 'main/utils/quarterUtilities';
 
 jest.mock('react', ()=>({
     ...jest.requireActual('react'),
-    useState: jest.fn()
+    useState: jest.fn(),
   }))
 import { useState } from 'react';
 

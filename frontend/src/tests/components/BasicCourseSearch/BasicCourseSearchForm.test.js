@@ -2,11 +2,9 @@ import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { toast } from "react-toastify";
-import useSWR from "swr";
 import { allTheSubjects } from "fixtures/subjectFixtures";
 
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
-jest.mock("swr");
 
 jest.mock("react-toastify", () => ({
 	toast: jest.fn(),
@@ -15,10 +13,6 @@ jest.mock("react-toastify", () => ({
 describe("BasicCourseSearchForm tests", () => {
 	const addToast = jest.fn();
 	beforeEach(() => {
-		useSWR.mockReturnValue({
-			data: allTheSubjects,
-			error: undefined,
-		});
 		toast.mockReturnValue({
 			addToast: addToast,
 		});
@@ -26,6 +20,7 @@ describe("BasicCourseSearchForm tests", () => {
 
 	test("renders without crashing", () => {
 		render(<BasicCourseSearchForm />);
+
 	});
 
 	test("when I select a quarter, the state for quarter changes", () => {
@@ -67,15 +62,15 @@ describe("BasicCourseSearchForm tests", () => {
 		);
 
 		const expectedFields = {
-			quarter: "20204",
-			subject: "MATH",
+			quarter: "20211",
+			subject: "ANTH",
 			level: "G",
 		};
 
 		const selectQuarter = getByLabelText("Quarter");
-		userEvent.selectOptions(selectQuarter, "20204");
+		userEvent.selectOptions(selectQuarter, "20211");
 		const selectSubject = getByLabelText("Subject Area");
-		userEvent.selectOptions(selectSubject, "MATH");
+		userEvent.selectOptions(selectSubject, "ANTH");
 		const selectLevel = getByLabelText("Course Level");
 		userEvent.selectOptions(selectLevel, "G");
 
@@ -90,6 +85,10 @@ describe("BasicCourseSearchForm tests", () => {
 			expect.any(Object),
 			expectedFields
 		);
+
+		// expect(localStorage.getItem("BasicSearch.CourseLevel") != 12);
+		// expect(localStorage.getItem("BasicSearch.Quarter") == "20204");
+		// expect(localStorage.getItem("BasicSearch.Subject") == "MATH");
 	});
 
 	test("when I click submit when JSON is EMPTY, setCourse is not called!", async () => {
@@ -122,5 +121,6 @@ describe("BasicCourseSearchForm tests", () => {
 
 		await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(0));
 	});
+
 
 });

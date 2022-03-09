@@ -3,7 +3,13 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
 import { useState } from "react";
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
-import { fetchBasicCourseJSON } from "main/services/courseSearches";
+
+//temp placeholder
+/* istanbul ignore next */ 
+function fetchBasicCourseJSON(event, params){
+  return null;
+}
+
 
 export default function HomePage() {
 
