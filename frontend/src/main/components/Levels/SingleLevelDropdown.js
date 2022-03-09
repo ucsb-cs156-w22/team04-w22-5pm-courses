@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Form, FormControl } from 'react-bootstrap';
-import { ManyQuarters } from 'stories/components/Quarters/SingleQuarterDropdown.stories';
+import { Form } from 'react-bootstrap';
 
 function SingleLevelDropdown({levels, level, setLevel, controlId, onChange = null, label = "Course Level"}){
 
