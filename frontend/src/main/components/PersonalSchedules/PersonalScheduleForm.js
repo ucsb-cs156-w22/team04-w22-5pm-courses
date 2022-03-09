@@ -73,14 +73,21 @@ function PersonalScheduleForm({ initialPersonalSchedule, submitAction, buttonLab
                     {errors.description?.message}
                 </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" data-testid="PersonalScheduleForm-quarter">
-                
-                <SingleQuarterDropdown
-                    quarter={quarter}
-                    setQuarter={setQuarter} 
-                    controlId={"PersonalScheduleForm-quarter"}
-                    label={"Quarter"}
-                    quarters={quarterRange("20081", "20224") }/>
+
+            <Form.Group className="mb-3" >
+                <Form.Label htmlFor="quarter">Quarter</Form.Label>
+                <Form.Control
+                    data-testid="PersonalScheduleForm-quarter"
+                    id="quarter"
+                    type="text"
+                    isInvalid={Boolean(errors.quarter)}
+                    {...register("quarter", {
+                        required: "Quarter is required."
+                    })}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.quarter?.message}
+                </Form.Control.Feedback>
             </Form.Group>
 
 
