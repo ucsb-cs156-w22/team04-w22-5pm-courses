@@ -2,7 +2,6 @@ import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { toast } from "react-toastify";
-import { allTheSubjects } from "fixtures/subjectFixtures";
 
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
 
@@ -20,7 +19,6 @@ describe("BasicCourseSearchForm tests", () => {
 
 	test("renders without crashing", () => {
 		render(<BasicCourseSearchForm />);
-
 	});
 
 	test("when I select a quarter, the state for quarter changes", () => {
@@ -86,9 +84,6 @@ describe("BasicCourseSearchForm tests", () => {
 			expectedFields
 		);
 
-		// expect(localStorage.getItem("BasicSearch.CourseLevel") != 12);
-		// expect(localStorage.getItem("BasicSearch.Quarter") == "20204");
-		// expect(localStorage.getItem("BasicSearch.Subject") == "MATH");
 	});
 
 	test("when I click submit when JSON is EMPTY, setCourse is not called!", async () => {
@@ -120,6 +115,10 @@ describe("BasicCourseSearchForm tests", () => {
 		userEvent.click(submitButton);
 
 		await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(0));
+		expect(toast).toHaveBeenCalledWith(
+			"If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",{
+				appearance: "error",
+		});
 	});
 
 

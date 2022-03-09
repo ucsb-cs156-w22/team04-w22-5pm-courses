@@ -6,7 +6,7 @@ import { quarterRange } from 'main/utils/quarterUtilities';
 
 jest.mock('react', ()=>({
     ...jest.requireActual('react'),
-    useState: jest.fn(),
+    useState: jest.fn()
   }))
 import { useState } from 'react';
 
