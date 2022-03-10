@@ -14,22 +14,18 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 	const quarters = quarterRange("20084", "20222");
 
 
-    // Stryker disable next-line all : not sure how to test/mock local storage
-    const localSubject = localStorage.getItem("BasicSearch.Subject");
-    // Stryker disable next-line all : not sure how to test/mock local storage
-    const localQuarter = localStorage.getItem("BasicSearch.Quarter");
-    // Stryker disable next-line all : not sure how to test/mock local storage
+
+	// Stryker disable all : not sure how to test/mock local storage
+	const localSubject = localStorage.getItem("BasicSearch.Subject");
+	const localQuarter = localStorage.getItem("BasicSearch.Quarter");
 	const localLevel = localStorage.getItem("BasicSearch.CourseLevel");
-	
+
 	const firstDepartment = allTheSubjects[0].subjectCode;
-    // Stryker disable next-line all : not sure how to test/mock local storage
 	const [quarter, setQuarter] = useState(localQuarter || quarters[0].yyyyq);
-    // Stryker disable next-line all : not sure how to test/mock local storage
 	const [subject, setSubject] = useState(localSubject || firstDepartment);
-    // Stryker disable next-line all : not sure how to test/mock local storage
 	const [level, setLevel] = useState(localLevel || "U");
-    // Stryker disable next-line all : not sure how to test/mock local storage
 	const [errorNotified, setErrorNotified] = useState(false);
+	// Stryker restore all
 
 
 	const handleSubmit = (event) => {
