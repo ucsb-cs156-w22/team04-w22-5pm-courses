@@ -60,11 +60,15 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
                         setLevel={setLevel}
                         controlId={"BasicSearch.Level"}
                     /></Col>
+					<Row style={{paddingTop: 10}}>
+						<Col md = "auto">
+							<Button variant="primary" type="submit">
+								Submit
+							</Button>
+						</Col>
+					</Row>
 				</Row>
 			</Container>
-			<Button variant="primary" type="submit">
-				Submit
-			</Button>
 		</Form>
 	);
 };
