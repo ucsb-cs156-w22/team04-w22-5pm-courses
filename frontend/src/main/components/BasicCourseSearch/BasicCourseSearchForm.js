@@ -26,12 +26,7 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
   // Stryker restore all
 
   const handleSubmit = (event) => {
-    toast(
-      "If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",
-      {
-        appearance: "error",
-      }
-    );
+	console.log("in here")
     event.preventDefault();
     fetchJSON(event, { quarter, subject, level }).then((courseJSON) => {
       setCourseJSON(courseJSON);
