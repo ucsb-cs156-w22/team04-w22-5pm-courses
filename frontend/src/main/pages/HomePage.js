@@ -21,16 +21,6 @@ function setCourseJSON(json){
 
 export default function HomePage() {
 
-  // const initialCourseJSON = {
-  //     "pageNumber": 1,
-  //     "pageSize": 1,
-  //     "total": 0,
-  //     "classes": []
-  // };
-
-  // // courseId, title, sectionNumber, instructor, enroll code, units, total enrolled students, max enrolled
-  // const [courseJSON, setCourseJSON] = useState(initialCourseJSON);
-
   return (
     <BasicLayout>
       <div className="pt-2">

@@ -25,8 +25,6 @@ describe("HomePage tests", () => {
         );
     });
 
-    test
-
 });
 
 

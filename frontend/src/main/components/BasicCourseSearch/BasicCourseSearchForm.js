@@ -38,11 +38,6 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 		});
 		event.preventDefault();
 		fetchJSON(event, { quarter, subject, level }).then((courseJSON) => {
-			// if (courseJSON.total === 0) {
-			// 	toast("There are no courses that match the requested criteria.", {
-			// 		appearance: "error",
-			// 	});
-			// }
 			setCourseJSON(courseJSON);
 		});
 	};
