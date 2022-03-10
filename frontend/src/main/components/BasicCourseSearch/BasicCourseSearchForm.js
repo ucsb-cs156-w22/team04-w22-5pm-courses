@@ -33,6 +33,9 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 
 
 	const handleSubmit = (event) => {
+		toast("If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",{
+			appearance: "error",
+		});
 		event.preventDefault();
 		fetchJSON(event, { quarter, subject, level }).then((courseJSON) => {
 			// if (courseJSON.total === 0) {
@@ -41,9 +44,6 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
 			// 	});
 			// }
 			setCourseJSON(courseJSON);
-		});
-		toast("If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",{
-			appearance: "error",
 		});
 	};
 
