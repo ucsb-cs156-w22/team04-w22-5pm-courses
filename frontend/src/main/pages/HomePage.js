@@ -2,10 +2,12 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useState } from "react";
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
 import { useBackendMutation } from "main/utils/useBackend";
+import { queryAllByTestId } from "@testing-library/react";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
-
-  const [courseJSON, setCourseJSON] = useState([])
+  // Stryker disable next-line all : Can't test state because hook is internal
+  const [courseJSON, setCourse] = useState([]);
 
   const objectToAxiosParams = (query) => ({
     url: "/api/public/basicsearch",
@@ -13,24 +15,26 @@ export default function HomePage() {
     params: {
       qtr: query.quarter,
       dept: query.subject,
-      level: query.level
+      level: query.level,
     },
   });
-  
+
   const onSuccess = (courses) => {
-    return courses
+    //Toast only in place while Table component has not been added to the page
+    //The toast helps us test that the correct input has been received
+    //After the table component has been added, we can directly check whether the table has the received result
+    toast(courses.classes.length + " Courses Retrieved");
+    return courses.classes;
   };
-  
+
   const mutation = useBackendMutation(
     objectToAxiosParams,
-    {onSuccess},
+    { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
     []
   );
-  
-  
-  // Stryker disable next-line all : temporary placeholder function. This function fetches the course data given quarter, level, subject
-  async function fetchBasicCourseJSON(event, query){
+
+  async function fetchBasicCourseJSON(event, query) {
     mutation.mutate(query);
   }
 
@@ -38,8 +42,11 @@ export default function HomePage() {
     <BasicLayout>
       <div className="pt-2">
         <h5>Welcome to the UCSB Courses Search App!</h5>
-        <BasicCourseSearchForm setCourseJSON={setCourseJSON} fetchJSON={fetchBasicCourseJSON} />
+        <BasicCourseSearchForm
+          setCourseJSON={setCourse}
+          fetchJSON={fetchBasicCourseJSON}
+        />
       </div>
     </BasicLayout>
-  )
+  );
 }
