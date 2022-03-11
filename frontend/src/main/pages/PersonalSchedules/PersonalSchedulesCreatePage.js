@@ -12,7 +12,7 @@ export default function PersonalSchedulesCreatePage() {
     params: {
       name: personalSchedule.name,
       description: personalSchedule.description,
-      quarter: JSON.stringify(personalSchedule, null, 4)
+      quarter: personalSchedule.quarter
     }
   });
 
@@ -30,7 +30,6 @@ export default function PersonalSchedulesCreatePage() {
   const { isSuccess } = mutation
 
   const onSubmit = async (data) => {
-    console.log(data);
     mutation.mutate(data);
   }
 
