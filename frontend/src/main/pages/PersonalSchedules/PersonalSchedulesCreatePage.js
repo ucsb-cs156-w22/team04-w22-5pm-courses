@@ -12,8 +12,7 @@ export default function PersonalSchedulesCreatePage() {
     params: {
       name: personalSchedule.name,
       description: personalSchedule.description,
-      quarter: JSON.stringify(object, null, 4))
-
+      quarter: JSON.stringify(object, null, 4)
     }
   });
 
