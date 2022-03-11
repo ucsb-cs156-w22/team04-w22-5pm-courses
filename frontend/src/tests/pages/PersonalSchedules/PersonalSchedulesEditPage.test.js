@@ -111,7 +111,7 @@ describe("PersonalSchedulesEditPage tests", () => {
             const quarterField = document.querySelector("#PersonalScheduleForm-quarter");
             const submitButton = getByTestId("PersonalScheduleForm-submit");
 
-            expect(nameField).toHaveValue("17");
+            expect(nameField).toHaveValue("Pi Day");
             expect(quarterField).toHaveValue("20221");
             expect(descriptionField).toHaveValue("Pi Day");
         });
@@ -136,7 +136,7 @@ describe("PersonalSchedulesEditPage tests", () => {
             const submitButton = getByTestId("PersonalScheduleForm-submit");
 
             //expect(idField).toHaveValue("17");
-            expect(nameField).toHaveValue("17");
+            expect(nameField).toHaveValue("Pi Day");
             expect(quarterField).toHaveValue("20221");
             expect(descriptionField).toHaveValue("Pi Day");
 
