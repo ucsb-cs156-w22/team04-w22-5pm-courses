@@ -10,7 +10,7 @@ export default function PersonalSchedulesCreatePage() {
     url: "/api/personalschedules/post",
     method: "POST",
     params: {
-      name: personalSchedule.name,
+      name: personalSchedule,
       description: personalSchedule.description,
       quarter: personalSchedule.quarter
     }
