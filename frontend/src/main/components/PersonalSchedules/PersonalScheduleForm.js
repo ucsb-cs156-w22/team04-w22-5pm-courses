@@ -74,13 +74,15 @@ function PersonalScheduleForm({ initialPersonalSchedule, submitAction, buttonLab
                 </Form.Control.Feedback>
             </Form.Group>
                 
-            <SingleQuarterDropdown
-                quarter={quarter}
-                setQuarter={setQuarter} 
-                controlId={"PersonalScheduleForm-quarter"}
-                label={"Quarter"}
-                quarters={quarterRange("20081", "20224") }/>
-
+            <Form.Group className="mb-3" data-testid="PersonalScheduleForm-quarter">
+                
+                <SingleQuarterDropdown
+                    quarter={quarter}
+                    setQuarter={setQuarter} 
+                    controlId={"PersonalScheduleForm-quarter"}
+                    label={"Quarter"}
+                    quarters={quarterRange("20081", "20224") }/>
+            </Form.Group>
 
             <Button
                 type="submit"
