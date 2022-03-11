@@ -18,6 +18,7 @@ export default function HomePage() {
   });
   
   const onSuccess = (courses) => {
+    console.log(courses)
     return courses
   };
   

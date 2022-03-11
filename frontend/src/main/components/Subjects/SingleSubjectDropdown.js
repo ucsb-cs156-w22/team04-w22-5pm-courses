@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Form } from "react-bootstrap";
-import { compareValues } from "main/utils/sortHelper"
 
 const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onChange = null, label="Subject Area"}) => {
 
@@ -8,7 +7,7 @@ const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onCha
 
     const [subjectState, setSubjectState] = useState(
         // Stryker disable next-line all : not sure how to test/mock local storage
-        localSearchSubject || subjects[0].subjectCode
+        localSearchSubject || subject
         );
 
     const handleSubjectOnChange = (event) => {
@@ -20,7 +19,6 @@ const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onCha
         }
     };
 
-    subjects.sort(compareValues("subjectCode"));
 
     return (
         <Form.Group controlId={controlId}>
@@ -30,7 +28,7 @@ const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onCha
                 value={subjectState} 
                 onChange={handleSubjectOnChange} 
             >
-                {subjects.map(function (object, i) {
+                {subjects.length > 0 ? subjects.map(function (object, i) {
                     const key=`${controlId}-option-${i}`;
                     return (
                         <option 
@@ -41,7 +39,7 @@ const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onCha
                             {object.subjectCode} - {object.subjectTranslation}
                         </option>
                         );
-                })}
+                }) : []}
             </Form.Control>
         </Form.Group>
     );
