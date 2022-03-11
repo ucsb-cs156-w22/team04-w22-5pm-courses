@@ -1,3 +1,4 @@
+import { compareValues } from 'main/utils/sortHelper';
 import React, { useState } from 'react'
 import { Form } from "react-bootstrap";
 
@@ -19,6 +20,7 @@ const SingleSubjectDropdown = ({ subjects, subject, setSubject, controlId, onCha
         }
     };
 
+    subjects.sort(compareValues("subjectCode"));
 
     return (
         <Form.Group controlId={controlId}>

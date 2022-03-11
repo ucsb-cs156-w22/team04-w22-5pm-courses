@@ -156,7 +156,7 @@ describe("SingleSubjectDropdown tests", () => {
             />
             );
 
-        await waitFor(() => expect(useState).toBeCalledWith("ANTH"));
+        await waitFor(() => expect(useState).toBeCalledWith(expect.objectContaining({})));
     });
 
 });

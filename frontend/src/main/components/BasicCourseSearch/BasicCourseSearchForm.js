@@ -9,7 +9,6 @@ import SingleQuarterDropdown from "../Quarters/SingleQuarterDropdown";
 import SingleSubjectDropdown from "../Subjects/SingleSubjectDropdown";
 import SingleLevelDropdown from "../Levels/SingleLevelDropdown";
 import { useBackendMutation } from "main/utils/useBackend";
-import { compareValues } from "main/utils/sortHelper";
 
 const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
   const quarters = quarterRange("20084", "20222");
@@ -32,7 +31,6 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
   });
 
   const onSuccess = (listSubjects) => {
-    listSubjects.sort(compareValues("subjectCode"));
     setSubjects(listSubjects);
   };
 
