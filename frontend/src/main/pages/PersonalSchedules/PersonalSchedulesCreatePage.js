@@ -12,7 +12,7 @@ export default function PersonalSchedulesCreatePage() {
     params: {
       name: personalSchedule.name,
       description: personalSchedule.description,
-      quarter: personalSchedule.Quarter
+      quarter: "20082"
     }
   });
 
