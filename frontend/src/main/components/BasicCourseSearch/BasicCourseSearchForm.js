@@ -19,8 +19,30 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
   const localLevel = localStorage.getItem("BasicSearch.CourseLevel");
 
   const firstDepartment = allTheSubjects[0].subjectCode;
+
+  useEffect(() => {
+    const objectToAxiosParams = () => ({
+      url: "/api/UCSBSubjects/all",
+      method: "GET",
+      params: {},
+    });
+    const onSuccess = (listSubjects) => {
+		console.log(listSubjects);
+		setSubjects(listSubjects);
+    };
+
+	const mutation = useBackendMutation(
+		objectToAxiosParams,
+		{onSuccess},
+		// Stryker disable next-line all : hard to set up test for caching
+		[]
+	);
+	mutation.mutate();
+  }, []);
+
   const [quarter, setQuarter] = useState(localQuarter || quarters[0].yyyyq);
   const [subject, setSubject] = useState(localSubject || firstDepartment);
+  const [subjects, setSubjects] = useState();
   const [level, setLevel] = useState(localLevel || "U");
   const [errorNotified, setErrorNotified] = useState(false);
   // Stryker restore all
@@ -48,7 +70,7 @@ const BasicCourseSearchForm = ({ setCourseJSON, fetchJSON }) => {
           </Col>
           <Col md="auto">
             <SingleSubjectDropdown
-              subjects={allTheSubjects}
+              subjects={subjects}
               subject={subject}
               setSubject={setSubject}
               controlId={"BasicSearch.Subject"}

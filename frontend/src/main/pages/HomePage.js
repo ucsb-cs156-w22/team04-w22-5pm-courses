@@ -5,7 +5,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 
 export default function HomePage() {
 
-  [courseJSON, setCourseJSON] = useState([])
+  const [courseJSON, setCourseJSON] = useState([])
 
   const objectToAxiosParams = (query) => ({
     url: "/api/public/basicsearch",
@@ -29,7 +29,7 @@ export default function HomePage() {
   );
   
   
-  // Stryker disable next-line all : temporary placeholder function. This function fetches the course data given quater, level, subject
+  // Stryker disable next-line all : temporary placeholder function. This function fetches the course data given quarter, level, subject
   async function fetchBasicCourseJSON(event, query){
     mutation.mutate(query);
   }
