@@ -36,12 +36,14 @@ function SingleQuarterDropdown({ quarters, quarter, setQuarter, controlId, onCha
         <Form.Group controlId={controlId}>
             <Form.Label>{label}</Form.Label>
             <Form.Control
+                data-testid="PersonalScheduleForm-quarter"
+                id="quarter"
                 as="select"
                 value={quarterState}
                 onChange={handleQuarterOnChange}
             >
                 {quarters.map(function (object, i) {
-                    const key=`${controlId}-option-${i}`;
+                    const key=`${controlId}-option-${i}`; //try grabbing this next maybe
                     return (
                         <option
                             key={key}

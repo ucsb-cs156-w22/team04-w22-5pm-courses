@@ -77,6 +77,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
         const nameField = getByTestId("PersonalScheduleForm-name");
         const descriptionField = getByTestId("PersonalScheduleForm-description");
         const quarterField = document.querySelector("#PersonalScheduleForm-quarter");
+        //const quarterField = document.querySelector("#PersonalScheduleForm-quarter");
         const submitButton = getByTestId("PersonalScheduleForm-submit");
 
         fireEvent.change(nameField, { target: { value: 'SampName' } });
