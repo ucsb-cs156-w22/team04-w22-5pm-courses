@@ -57,7 +57,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
             id: 17,
             name: "SampName",
             description: "desc",
-            quarter: "W07"
+            quarter: "W08"
         };
 
         axiosMock.onPost("/api/personalschedules/post").reply( 202, personalSchedule );
@@ -76,12 +76,12 @@ describe("PersonalSchedulesCreatePage tests", () => {
         
         const nameField = getByTestId("PersonalScheduleForm-name");
         const descriptionField = getByTestId("PersonalScheduleForm-description");
-        const quarterField = getByTestId("PersonalScheduleForm-quarter");
+        const quarterField = document.querySelector("#PersonalScheduleForm-quarter");
         const submitButton = getByTestId("PersonalScheduleForm-submit");
 
         fireEvent.change(nameField, { target: { value: 'SampName' } });
         fireEvent.change(descriptionField, { target: { value: 'desc' } });
-        fireEvent.change(quarterField, { target: { value: 'W07' } });
+        fireEvent.change(quarterField, { target: { value: '20124' } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -89,11 +89,13 @@ describe("PersonalSchedulesCreatePage tests", () => {
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
+        expect(quarterField).toHaveValue("20124");
+
         expect(axiosMock.history.post[0].params).toEqual(
             {
             "name": "SampName",
             "description": "desc",
-            "quarter": "W07"
+            "quarter": "20124" //why does this keep returning undefined, when I try to access the quarterField via axiosMock
         });
 
         expect(mockToast).toBeCalledWith("New personalSchedule Created - id: 17 name: SampName");
@@ -102,5 +104,3 @@ describe("PersonalSchedulesCreatePage tests", () => {
 
 
 });
-
-
