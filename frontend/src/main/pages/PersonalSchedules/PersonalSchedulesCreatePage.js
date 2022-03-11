@@ -12,7 +12,8 @@ export default function PersonalSchedulesCreatePage() {
     params: {
       name: personalSchedule.name,
       description: personalSchedule.description,
-      quarter: "20082"
+      quarter: JSON.stringify(object, null, 4))
+
     }
   });
 
