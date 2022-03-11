@@ -4,6 +4,12 @@ import userEvent from "@testing-library/user-event";
 import { toast } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
+import { allTheSubjects } from "fixtures/subjectFixtures";
+
+import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
+import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import axios from "axios";
+import AxiosMockAdapter from "axios-mock-adapter";
 
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
 
@@ -12,6 +18,15 @@ jest.mock("react-toastify", () => ({
 }));
 
 describe("BasicCourseSearchForm tests", () => {
+  const axiosMock = new AxiosMockAdapter(axios);
+  beforeEach(() => {
+    axiosMock
+      .onGet("/api/currentUser")
+      .reply(200, apiCurrentUserFixtures.userOnly);
+    axiosMock
+      .onGet("/api/systemInfo")
+      .reply(200, systemInfoFixtures.showingNeither);
+  });
   const queryClient = new QueryClient();
   const addToast = jest.fn();
   beforeEach(() => {
@@ -43,7 +58,8 @@ describe("BasicCourseSearchForm tests", () => {
     expect(selectQuarter.value).toBe("20204");
   });
 
-  test("when I select a subject, the state for subject changes", () => {
+  test("when I select a subject, the state for subject changes", async () => {
+    axiosMock.onGet("/api/UCSBSubjects/all").reply(200, allTheSubjects);
     const { getByLabelText } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -51,6 +67,10 @@ describe("BasicCourseSearchForm tests", () => {
         </MemoryRouter>
       </QueryClientProvider>
     );
+
+    await waitFor(() => {
+      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
+    });
     const selectSubject = getByLabelText("Subject Area");
     userEvent.selectOptions(selectSubject, "MATH");
     expect(selectSubject.value).toBe("MATH");
@@ -70,6 +90,7 @@ describe("BasicCourseSearchForm tests", () => {
   });
 
   test("when I click submit, the right stuff happens", async () => {
+    axiosMock.onGet("/api/UCSBSubjects/all").reply(200, allTheSubjects);
     const sampleReturnValue = {
       sampleKey: "sampleValue",
     };
@@ -96,13 +117,16 @@ describe("BasicCourseSearchForm tests", () => {
       level: "G",
     };
 
+    await waitFor(() => {
+      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
+    });
+
     const selectQuarter = getByLabelText("Quarter");
     userEvent.selectOptions(selectQuarter, "20211");
     const selectSubject = getByLabelText("Subject Area");
     userEvent.selectOptions(selectSubject, "ANTH");
     const selectLevel = getByLabelText("Course Level");
     userEvent.selectOptions(selectLevel, "G");
-
     const submitButton = getByText("Submit");
     userEvent.click(submitButton);
 
@@ -117,6 +141,7 @@ describe("BasicCourseSearchForm tests", () => {
   });
 
   test("when I click submit when JSON is EMPTY, setCourse is not called!", async () => {
+    axiosMock.onGet("/api/UCSBSubjects/all").reply(200, allTheSubjects);
     const sampleReturnValue = {
       sampleKey: "sampleValue",
       total: 0,
@@ -138,22 +163,19 @@ describe("BasicCourseSearchForm tests", () => {
       </QueryClientProvider>
     );
 
+    await waitFor(() => {
+      expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
+    });
+
     const selectQuarter = getByLabelText("Quarter");
     userEvent.selectOptions(selectQuarter, "20204");
     const selectSubject = getByLabelText("Subject Area");
     userEvent.selectOptions(selectSubject, "MATH");
     const selectLevel = getByLabelText("Course Level");
     userEvent.selectOptions(selectLevel, "G");
-
     const submitButton = getByText("Submit");
     userEvent.click(submitButton);
 
     await waitFor(() => expect(setCourseJSONSpy).toHaveBeenCalledTimes(0));
-    expect(toast).toHaveBeenCalledWith(
-      "If search were implemented, we would have made a call to the back end to get courses for x subject, x quarter, x level",
-      {
-        appearance: "error",
-      }
-    );
   });
 });
