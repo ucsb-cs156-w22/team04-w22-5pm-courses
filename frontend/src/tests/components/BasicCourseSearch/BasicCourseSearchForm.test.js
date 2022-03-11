@@ -21,7 +21,13 @@ describe("BasicCourseSearchForm tests", () => {
   });
 
   test("renders without crashing", () => {
-    render(<BasicCourseSearchForm />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <BasicCourseSearchForm />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
   });
 
   test("when I select a quarter, the state for quarter changes", () => {
