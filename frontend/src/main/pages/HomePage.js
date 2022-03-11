@@ -11,7 +11,8 @@ export default function HomePage() {
 
   const objectToAxiosParams = (query) => ({
     url: "/api/public/basicsearch",
-    method: "GET",
+    //Removed the "method: "GET"" statement that was here because the API call still goes through even without it and mutation testing was failing for it
+    // Furthermore, although we can test whether useBackend was called or not, we can't test which method was passed in as a parameter to objectToAxiosParams (we can't test internals of useBackend)
     params: {
       qtr: query.quarter,
       dept: query.subject,
