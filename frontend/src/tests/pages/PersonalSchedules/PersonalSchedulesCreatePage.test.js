@@ -96,6 +96,7 @@ describe("PersonalSchedulesCreatePage tests", () => {
             {
             "name": "SampName",
             "description": "desc",
+            "quarter": "20124"
         });
 
         expect(mockToast).toBeCalledWith("New personalSchedule Created - id: 17 name: SampName");
