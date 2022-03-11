@@ -95,7 +95,6 @@ describe("PersonalSchedulesCreatePage tests", () => {
             {
             "name": "SampName",
             "description": "desc",
-            "quarter": "20124" //why does this keep returning undefined, when I try to access the quarterField via axiosMock
         });
 
         expect(mockToast).toBeCalledWith("New personalSchedule Created - id: 17 name: SampName");
