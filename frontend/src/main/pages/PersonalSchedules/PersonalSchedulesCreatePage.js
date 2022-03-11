@@ -10,9 +10,9 @@ export default function PersonalSchedulesCreatePage() {
     url: "/api/personalschedules/post",
     method: "POST",
     params: {
-      name: personalSchedule,
+      name: personalSchedule.name,
       description: personalSchedule.description,
-      quarter: personalSchedule.quarter
+      quarter: personalSchedule.Quarter
     }
   });
 
@@ -30,6 +30,7 @@ export default function PersonalSchedulesCreatePage() {
   const { isSuccess } = mutation
 
   const onSubmit = async (data) => {
+    console.log(data);
     mutation.mutate(data);
   }
 
