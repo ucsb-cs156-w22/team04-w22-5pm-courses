@@ -89,8 +89,7 @@ public class PersonalSchedulesController extends ApiController {
         log.info("currentUser={}", currentUser);
         //If quarter is not in the format YYYYQ, an error message is generated indicating that format is wrong
 
-        let isnum = /^\d+$/.test(quarter);
-        if(!isnum){
+        if(+quarter){
           return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
         }else if(quarter.length != 5){
           return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
