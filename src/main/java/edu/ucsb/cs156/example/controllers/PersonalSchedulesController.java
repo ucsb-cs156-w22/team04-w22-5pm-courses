@@ -82,7 +82,7 @@ public class PersonalSchedulesController extends ApiController {
     @ApiOperation(value = "Create a new personal schedule")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
-    public ResponseEntity postSchedule(
+    public PersonalSchedule postSchedule(
             @ApiParam("name") @RequestParam String name,
             @ApiParam("description") @RequestParam String description,
             @ApiParam("quarter") @RequestParam String quarter) {
@@ -107,7 +107,8 @@ public class PersonalSchedulesController extends ApiController {
         personalschedule.setDescription(description);
         personalschedule.setQuarter(quarter);
         PersonalSchedule savedPersonalSchedule = personalscheduleRepository.save(personalschedule);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+        //return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+        return savedPersonalSchedule;
     }
 
     @ApiOperation(value = "Delete a personal schedule owned by this user")
