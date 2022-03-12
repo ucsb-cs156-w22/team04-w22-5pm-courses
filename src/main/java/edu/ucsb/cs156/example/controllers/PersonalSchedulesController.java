@@ -81,17 +81,16 @@ public class PersonalSchedulesController extends ApiController {
     @ApiOperation(value = "Create a new personal schedule")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
-    public PersonalSchedule postSchedule(
+    //@ResponseBody
+    public ResponseEntity<> postSchedule(
             @ApiParam("name") @RequestParam String name,
             @ApiParam("description") @RequestParam String description,
             @ApiParam("quarter") @RequestParam String quarter) {
         CurrentUser currentUser = getCurrentUser();
         log.info("currentUser={}", currentUser);
         //If quarter is not in the format YYYYQ, an error message is generated indicating that format is wrong
-
-        if(+quarter){
-          return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
-        }else if(quarter.length != 5){
+        /*
+        if(quarter.length != 5){
           return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
         }else if(1900 > parseInt(quarter.substring(0,4), 10)){
           return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
@@ -101,14 +100,14 @@ public class PersonalSchedulesController extends ApiController {
           return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
         }
         //test to see if these error messages return
-
+        */
         PersonalSchedule personalschedule = new PersonalSchedule();
         personalschedule.setUser(currentUser.getUser());
         personalschedule.setName(name);
         personalschedule.setDescription(description);
         personalschedule.setQuarter(quarter);
         PersonalSchedule savedPersonalSchedule = personalscheduleRepository.save(personalschedule);
-        return savedPersonalSchedule;
+        return new ResponseEntity<>(savedPersonalSchedule, HttpStatus.OK);;
     }
 
     @ApiOperation(value = "Delete a personal schedule owned by this user")
