@@ -3,6 +3,7 @@ import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { toast } from "react-toastify";
 
+import { allTheSubjects } from "fixtures/subjectFixtures";
 import BasicCourseSearchForm from "main/components/BasicCourseSearch/BasicCourseSearchForm";
 
 jest.mock("react-toastify", () => ({
@@ -29,7 +30,7 @@ describe("BasicCourseSearchForm tests", () => {
 	});
 
 	test("when I select a subject, the state for subject changes", () => {
-		const { getByLabelText } = render(<BasicCourseSearchForm />);
+		const { getByLabelText } = render(<BasicCourseSearchForm subjects={allTheSubjects} />);
 		const selectSubject = getByLabelText("Subject Area");
 		userEvent.selectOptions(selectSubject, "MATH");
 		expect(selectSubject.value).toBe("MATH");
@@ -54,6 +55,7 @@ describe("BasicCourseSearchForm tests", () => {
 
 		const { getByText, getByLabelText } = render(
 			<BasicCourseSearchForm
+				subjects={allTheSubjects}
 				setCourseJSON={setCourseJSONSpy}
 				fetchJSON={fetchJSONSpy}
 			/>
@@ -99,6 +101,7 @@ describe("BasicCourseSearchForm tests", () => {
 
 		const { getByText, getByLabelText } = render(
 			<BasicCourseSearchForm
+				subjects={allTheSubjects}
 				setCourseJSON={setCourseJSONSpy}
 				fetchJSON={fetchJSONSpy}
 			/>
