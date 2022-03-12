@@ -82,7 +82,7 @@ public class PersonalSchedulesController extends ApiController {
     @ApiOperation(value = "Create a new personal schedule")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
-    public PersonalSchedule postSchedule(
+    public ResponseEntity postSchedule(
             @ApiParam("name") @RequestParam String name,
             @ApiParam("description") @RequestParam String description,
             @ApiParam("quarter") @RequestParam String quarter) {
@@ -90,9 +90,9 @@ public class PersonalSchedulesController extends ApiController {
         log.info("currentUser={}", currentUser);
         //If quarter is not in the format YYYYQ, an error message is generated indicating that format is wrong
         
-        /*if(quarter.length() != 5){
+        if(quarter.length() != 5){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }else if(1900 > parseInt(quarter.substring(0,4), 10)){
+        }/*else if(1900 > parseInt(quarter.substring(0,4), 10)){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else if(parseInt(quarter.substring(0,4), 10) > 2099){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
@@ -107,8 +107,8 @@ public class PersonalSchedulesController extends ApiController {
         personalschedule.setDescription(description);
         personalschedule.setQuarter(quarter);
         PersonalSchedule savedPersonalSchedule = personalscheduleRepository.save(personalschedule);
-        //return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
-        return savedPersonalSchedule;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+        //return savedPersonalSchedule;
     }
 
     @ApiOperation(value = "Delete a personal schedule owned by this user")
