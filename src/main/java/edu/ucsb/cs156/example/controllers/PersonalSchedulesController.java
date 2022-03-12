@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,33 +82,32 @@ public class PersonalSchedulesController extends ApiController {
     @ApiOperation(value = "Create a new personal schedule")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
-    //@ResponseBody
-    public ResponseEntity<> postSchedule(
+    public ResponseEntity postSchedule(
             @ApiParam("name") @RequestParam String name,
             @ApiParam("description") @RequestParam String description,
             @ApiParam("quarter") @RequestParam String quarter) {
         CurrentUser currentUser = getCurrentUser();
         log.info("currentUser={}", currentUser);
         //If quarter is not in the format YYYYQ, an error message is generated indicating that format is wrong
-        /*
-        if(quarter.length != 5){
-          return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
-        }else if(1900 > parseInt(quarter.substring(0,4), 10)){
-          return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
+        
+        if(quarter.length() != 5){
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }/*else if(1900 > parseInt(quarter.substring(0,4), 10)){
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else if(parseInt(quarter.substring(0,4), 10) > 2099){
-          return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else if( (quarter.substring(4,5) != "1") && (quarter.substring(4,5) != "2") && (quarter.substring(4,5) != "3") && (quarter.substring(4,5) != "4")){
-          return genericMessage("Data was rejected because the quarter must be in YYYYQ format.");
-        }
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }*/
         //test to see if these error messages return
-        */
+        
         PersonalSchedule personalschedule = new PersonalSchedule();
         personalschedule.setUser(currentUser.getUser());
         personalschedule.setName(name);
         personalschedule.setDescription(description);
         personalschedule.setQuarter(quarter);
         PersonalSchedule savedPersonalSchedule = personalscheduleRepository.save(personalschedule);
-        return new ResponseEntity<>(savedPersonalSchedule, HttpStatus.OK);;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
     }
 
     @ApiOperation(value = "Delete a personal schedule owned by this user")
