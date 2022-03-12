@@ -90,9 +90,9 @@ public class PersonalSchedulesController extends ApiController {
         log.info("currentUser={}", currentUser);
         //If quarter is not in the format YYYYQ, an error message is generated indicating that format is wrong
         
-        if(quarter.length() != 5){
+        /*if(quarter.length() != 5){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }/*else if(1900 > parseInt(quarter.substring(0,4), 10)){
+        }else if(1900 > parseInt(quarter.substring(0,4), 10)){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }else if(parseInt(quarter.substring(0,4), 10) > 2099){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
