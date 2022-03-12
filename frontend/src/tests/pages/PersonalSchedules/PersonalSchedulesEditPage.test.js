@@ -138,7 +138,7 @@ describe("PersonalSchedulesEditPage tests", () => {
             //expect(idField).toHaveValue("17");
             expect(nameField).toHaveValue("Pi Day");
             expect(quarterField).toHaveValue("20081");
-            expect(descriptionField).toHaveValue("Pi Day");
+            expect(descriptionField).toHaveValue("desc");
 
             expect(submitButton).toBeInTheDocument();
 
